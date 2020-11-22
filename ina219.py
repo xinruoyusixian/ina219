@@ -1,6 +1,8 @@
+
 """Originally from: https://github.com/chrisb2/pyb_ina219 heavily tweaked.."""
 
 """MicroPython library for the INA219 sensor.
+
 
 This library supports the INA219 sensor from Texas Instruments with
 MicroPython using the I2C bus.
@@ -81,6 +83,7 @@ class INA219:
     __SADC2 = 4
     __SADC1 = 3
     __MODE3 = 2
+
     __MODE2 = 1
     __MODE1 = 0
 
@@ -142,7 +145,8 @@ class INA219:
 
     def current(self):
         """Return the bus current in milliamps."""
-        return self._current_register() * 1000 / 1000
+        #这里感觉不准  除以10 调整一下转换为mA
+        return self._current_register() / 10
 
     def sleep(self):
         """Put the INA219 into power down mode."""
@@ -200,4 +204,3 @@ class INA219:
                 register_value -= 65536
 
         return register_value
-
